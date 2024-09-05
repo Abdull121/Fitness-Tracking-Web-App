@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import { Outlet } from 'react-router-dom';
 import SideBar from './components/SideBar/SideBar';
 function Layout() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
