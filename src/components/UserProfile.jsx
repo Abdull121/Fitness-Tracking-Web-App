@@ -9,7 +9,7 @@ export default function UserProfile() {
           <User className="h-16 w-16 text-indigo-600" />
         </div>
       </div>
-      <h2 className="text-2xl font-bold text-center text-gray-800">John Doe</h2>
+      <h2 className="text-2xl font-bold text-center text-gray-800">Abdullah</h2>
       <p className="text-gray-600 text-center mb-6">Fitness Enthusiast</p>
       <div className="grid grid-cols-2 gap-4 text-center">
         <div>

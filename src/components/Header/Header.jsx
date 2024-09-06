@@ -117,7 +117,7 @@ function Header({ isSidebarOpen, toggleSidebar }) {
           >
             History
           </NavLink>
-          <Link to="/user">
+          <Link to="/userprofile">
             <User className='ml-5'/>
           </Link>
         </nav>

@@ -3,6 +3,7 @@ import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } 
 import Layout from './Layout.jsx'
 import Dashboard from './components/Dashboard.jsx'
 import Workouts from './components/pages/Workouts.jsx'
+import UserProfile from './components/pages/UserProfile.jsx'
 
 
 const router =  createBrowserRouter(
@@ -10,6 +11,8 @@ const router =  createBrowserRouter(
     <Route path='/' element={<Layout/>}>
 
           <Route path='' element={<Dashboard/>} />
+
+          <Route path='userprofile' element={<UserProfile/>}/>
 
           <Route path='workout' element={<Workouts/>}/>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dumbbell, Home, BarChart2, Clock } from 'lucide-react';
+import { Dumbbell, Home, BarChart2, Clock, User } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
 function SideBar({ isSidebarOpen }) {
@@ -74,6 +74,21 @@ function SideBar({ isSidebarOpen }) {
           <Home className="mr-3 h-5 w-5" />
           Dashboard
         </NavLink>
+
+
+        <NavLink  
+          to="/userprofile"
+          className={({ isActive }) =>
+            `flex items-center px-4 py-2 hover:text-indigo-700 hover:bg-indigo-100 rounded-md transition-colors duration-300 ${
+              isActive ? 'text-indigo-700 bg-indigo-100' : 'text-gray-700'
+            }`
+          }
+        >
+          <User className="mr-3 h-5 w-5" />
+          Profile
+        </NavLink>
+
+
         <NavLink
           to="/workout"
           className={({ isActive }) =>

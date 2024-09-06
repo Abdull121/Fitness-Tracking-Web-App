@@ -11,7 +11,7 @@ function Layout() {
   return (
     <>
       <Header isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-      <div className="md:flex">
+      <div className="md:flex bg-gray-100">
         <SideBar isSidebarOpen={isSidebarOpen} />
         <div className="md:flex-1">
           <Outlet />
