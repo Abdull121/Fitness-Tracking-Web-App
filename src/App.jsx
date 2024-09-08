@@ -2,8 +2,9 @@
 import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from 'react-router-dom'
 import Layout from './Layout.jsx'
 import Dashboard from './components/Dashboard.jsx'
-import Workouts from './components/pages/Workouts.jsx'
-import UserProfile from './components/pages/UserProfile.jsx'
+import Workouts from './pages/Workouts.jsx'
+import UserProfile from './pages/UserProfile.jsx'
+import Progress from './pages/Progress.jsx'
 
 
 const router =  createBrowserRouter(
@@ -12,9 +13,13 @@ const router =  createBrowserRouter(
 
           <Route path='' element={<Dashboard/>} />
 
+          {/* //TODO:use Pramas */}
           <Route path='userprofile' element={<UserProfile/>}/>
 
-          <Route path='workout' element={<Workouts/>}/>
+          <Route path='workout' element={<Workouts/>}/> 
+
+
+          <Route path='progress' element={<Progress/>}/>
 
 
     </Route>
