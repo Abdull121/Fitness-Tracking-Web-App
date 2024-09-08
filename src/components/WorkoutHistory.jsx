@@ -1,17 +1,38 @@
 import React from 'react'
 import { Calendar, Clock, Flame } from 'lucide-react'
 
-export default function WorkoutHistory() {
+ function WorkoutHistory({
+
+  width="",
+  marginTop = "",
+  marginLR= "",
+  renderHistory = false
+
+
+
+}) {
   const workouts = [
     { date: '2023-04-01', workout: 'Strength Training', duration: '60 mins', calories: '450 kcal' },
     { date: '2023-03-30', workout: 'Cardio', duration: '45 mins', calories: '350 kcal' },
     { date: '2023-03-28', workout: 'Yoga', duration: '75 mins', calories: '250 kcal' },
     { date: '2023-03-25', workout: 'HIIT', duration: '30 mins', calories: '300 kcal' },
     { date: '2023-03-22', workout: 'Strength Training', duration: '90 mins', calories: '550 kcal' },
+
+
+    { date: '2023-03-28', workout: 'Yoga', duration: '75 mins', calories: '250 kcal' },{ date: '2023-03-28', workout: 'Yoga', duration: '75 mins', calories: '250 kcal' },{ date: '2023-03-28', workout: 'Yoga', duration: '75 mins', calories: '250 kcal' },{ date: '2023-03-28', workout: 'Yoga', duration: '75 mins', calories: '250 kcal' },{ date: '2023-03-28', workout: 'Yoga', duration: '75 mins', calories: '250 kcal' },
+
+
   ]
 
+  const firstFiveHistory = workouts.slice(0,5)
+
+  const renderWorkout = renderHistory ? workouts : firstFiveHistory
+
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md overflow-x-auto">
+
+
+    <div className={`bg-white p-6 rounded-lg shadow-md overflow-x-auto  ${width} ${marginTop}
+    ${marginLR} `}>
       <h2 className="text-xl font-bold mb-4 text-gray-800">Workout History</h2>
       <table className="w-full min-w-max table-auto border-collapse">
         <thead>
@@ -23,7 +44,7 @@ export default function WorkoutHistory() {
           </tr>
         </thead>
         <tbody>
-          {workouts.map((workout, index) => (
+          {renderWorkout.map((workout, index) => (
             <tr key={index} className="border-b">
               <td className="py-2 px-4">
                 <div className="flex items-center">
@@ -46,8 +67,11 @@ export default function WorkoutHistory() {
               </td>
             </tr>
           ))}
+
         </tbody>
       </table>
     </div>
   )
 }
+
+export default WorkoutHistory

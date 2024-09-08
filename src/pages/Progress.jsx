@@ -16,7 +16,7 @@ function Progress() {
 
       />
 
-
+{/* 
       <DailyGoals
           tittle="weekly Goals"
           burnedCalories= "800"
@@ -26,7 +26,7 @@ function Progress() {
           spendWorkout= "150"
           workoutTime="300" 
 
-      />
+      /> */}
 
     </div>
     

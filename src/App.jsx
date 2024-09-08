@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard.jsx'
 import Workouts from './pages/Workouts.jsx'
 import UserProfile from './pages/UserProfile.jsx'
 import Progress from './pages/Progress.jsx'
+import History from './pages/History.jsx'
 
 
 const router =  createBrowserRouter(
@@ -18,8 +19,10 @@ const router =  createBrowserRouter(
 
           <Route path='workout' element={<Workouts/>}/> 
 
-
           <Route path='progress' element={<Progress/>}/>
+
+          <Route path='history' element={<History/>}/>
+          
 
 
     </Route>

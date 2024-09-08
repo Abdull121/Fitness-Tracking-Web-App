@@ -1,10 +1,11 @@
 import React from 'react'
-import WorkoutHistory from '../components/WorkoutHistory'
+
+import WorkoutForm from '../components/WorkoutForm'
 
 function Workouts() {
   return (
-    <div className='mt-8 pt-8'>
-      <WorkoutHistory/>
+    <div >
+      <WorkoutForm />
     </div>
   )
 }
