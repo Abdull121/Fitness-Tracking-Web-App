@@ -1,5 +1,5 @@
 import React from 'react'
-import WorkoutHistory from '../components/WorkoutHistory'
+import {WorkoutHistory} from '../components/index'
 
 function History() {
   return (

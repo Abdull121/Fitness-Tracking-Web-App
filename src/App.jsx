@@ -1,7 +1,7 @@
 
 import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from 'react-router-dom'
 import Layout from './Layout.jsx'
-import Dashboard from './components/Dashboard.jsx'
+import {Dashboard} from './components/index.js'
 import Workouts from './pages/Workouts.jsx'
 import UserProfile from './pages/UserProfile.jsx'
 import Progress from './pages/Progress.jsx'

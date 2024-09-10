@@ -1,5 +1,5 @@
 import React from 'react'
-import DailyGoals from '../components/DailyGoals'
+import {DailyGoals} from '../components/index'
 
 function Progress() {
   return (
