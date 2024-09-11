@@ -6,25 +6,26 @@ import Workouts from './pages/Workouts.jsx'
 import UserProfile from './pages/UserProfile.jsx'
 import Progress from './pages/Progress.jsx'
 import History from './pages/History.jsx'
+import Login from './pages/Login.jsx'
+import SignUp from './pages/SignUp.jsx'
 
 
 const router =  createBrowserRouter(
   createRoutesFromElements(
+    
+    <Route>
+     <Route path='login' element={<Login/>}/>
+     <Route path='signup' element={<SignUp/>}/>
+
     <Route path='/' element={<Layout/>}>
 
           <Route path='' element={<Dashboard/>} />
-
-          {/* //TODO:use Pramas */}
           <Route path='userprofile' element={<UserProfile/>}/>
-
           <Route path='workout' element={<Workouts/>}/> 
-
           <Route path='progress' element={<Progress/>}/>
-
           <Route path='history' element={<History/>}/>
-          
 
-
+    </Route>
     </Route>
   )
 )

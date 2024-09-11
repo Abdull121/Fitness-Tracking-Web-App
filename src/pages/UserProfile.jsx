@@ -1,5 +1,5 @@
 import React from 'react'
-import { UserProfileForm } from '../components/index'
+import { UserProfileForm, Input } from '../components/index'
 
 function UserProfile() {
   return (
