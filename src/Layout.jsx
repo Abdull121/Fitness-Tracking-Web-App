@@ -8,7 +8,7 @@ function Layout() {
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
 
-  const user = false;
+  const user = true;
 
 
   return (user ? 
