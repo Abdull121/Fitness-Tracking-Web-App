@@ -3,18 +3,55 @@ import { useForm} from 'react-hook-form'
 import { FcGoogle } from 'react-icons/fc'
 import { FiEye, FiEyeOff } from 'react-icons/fi'
 import Input from './Input'
-import { Link } from 'react-router-dom'
+import { Link ,useNavigate} from 'react-router-dom'
+import authService from '../Appwrite/auth'
 
 
 export default function SignInForm() {
   const { register, handleSubmit, formState: { errors } } = useForm()
   const [showPassword, setShowPassword] = useState(false)
 
-  const onSubmit = (data) => {
-    console.log('Sign in attempt:', data)
-    // Handle sign-in logic here
-  }
+  const navigate = useNavigate()
 
+   const [error, setError] = useState("")
+
+   const onSubmit = async (data) => {
+    setError(""); // Clear any previous error messages
+  
+    try {
+       console.log('Sign in attempt:', data);
+  
+      const session = await authService.login(data); 
+
+      console.log("sessions:: ", session)
+  
+      if (session) {
+        const userData = await authService.getCurrentUser();
+        console.log("user login response:: ",userData)
+        
+        if (userData) {
+          // Navigate to the dashboard if user data exists
+          navigate("/");
+        } else {
+          // If user data is not returned, throw an error
+          throw new Error("User not found");
+        }
+      } else {
+        // If session is invalid, set "User not found" error
+        setError("User not found");
+      }
+    } catch (error) {
+      // Handle any errors from the login attempt
+      console.log("login error:", error);
+      
+      if (error.message.includes("User not found")) {
+        setError("User not found");
+      } else {
+        setError("Login failed: " + error.message);
+      }
+    }
+  };
+  
 //   const login = async(data) => {
 //     setError("")
 //     try {
@@ -40,6 +77,10 @@ export default function SignInForm() {
             Stay updated on your fitness journey
           </p>
         </div>
+        <div className="text-center text-red-600">
+  {error && <p>{error}</p>}
+        </div>
+
         <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div className="rounded-md shadow-sm space-y-4">
             <div>

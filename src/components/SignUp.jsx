@@ -2,17 +2,45 @@ import React from 'react'
 import { useForm} from 'react-hook-form'
 import { FiEye, FiEyeOff } from 'react-icons/fi'
 import Input from './Input'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
+import authService from '../Appwrite/auth'
 
 
 export default function SignInForm() {
   const { register, handleSubmit, formState: { errors } } = useForm()
   const [showPassword, setShowPassword] = React.useState(false)
 
-  const onSubmit = (data) => {
-    console.log('Sign in attempt:', data)
-    // Handle sign-in logic here
-  }
+  const [error, setError] = React.useState("")
+  const navigate = useNavigate()
+
+  const onSubmit = async (data) => {
+    setError(""); // Clear previous errors
+  
+    try {
+  
+      // Attempt to create an account with the provided data
+         const response =  await authService.createAccount(data);
+         console.log(response)
+          navigate("/login")
+          
+        //  const currentUser =  await authService.getCurrentUser();
+
+        //  console.log("getCurrentuserDATA:: ",currentUser) 
+
+
+        // if (currentUser) {
+        //   console.log('User created and logged in:', currentUser);
+        //   navigate("/"); // Redirect to home page
+        // } else {
+        //   throw new Error("User account was created, but fetching user data failed.");
+        // }
+       
+    } catch (error) {
+      console.log("Signup error:", error);
+      setError("Signup failed: " + (error.message || "Unknown error"));
+    }
+  };
+  
 
 
 //   const create = async(data) => {
@@ -115,6 +143,9 @@ export default function SignInForm() {
             >
               Create account
             </button>
+          </div>
+          <div className="text-center text-red-600">
+              {error && <p>{error}</p>}
           </div>
 
           <div className="text-center">

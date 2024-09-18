@@ -1,4 +1,4 @@
-import conf from '../conf/Conf';
+import conf from '../conf/conf.js';
 import { Client, Account, ID } from "appwrite";
 
 
@@ -11,43 +11,57 @@ export class AuthService {
             .setEndpoint(conf.appwriteUrl)
             .setProject(conf.appwriteProjectId);
         this.account = new Account(this.client);
-        
-        // console.log("appwriteURL :: ",conf.appwriteUrl)
-        // console.log("Project ID :: ",conf.appwriteProjectId)
-        // console.log("Collection ID :: ",conf.appwriteCollectionId)
-        // console.log( "BucketID :: ",conf.appwriteBucketId)
-        // console.log("DatabaseID:: ",conf.appwriteDatabaseId)
-
-
             
     }
 
     async createAccount({email, password, name}) {
         try {
             const userAccount = await this.account.create(ID.unique(), email, password, name);
-            if (userAccount) {
-                // call another method
-                return this.login({email, password});
-            } else {
-               return  userAccount;
-            }
+            return userAccount
+           
         } catch (error) {
-            console.log("createAccount APPWRITE Error:: ",error)
+            console.log("createAccount error::",error)
            
         }
     }
 
-    async login({email, password}) {
+
+    async login({ email, password }) {
         try {
-            return await this.account.createEmailSession(email, password);
+            // Validate input parameters
+            if (!email || !password) {
+                throw new Error("Missing required parameters: email and password");
+            }
+    
+            // Debugging: Log the email and password
+            console.log("Logging in with email:", email, password);
+    
+            // Check for active sessions
+            const currentUser = await this.getCurrentUser();
+    
+            if (currentUser) {
+                console.log("Session already active for user:", currentUser);
+                // Optionally log out before logging in again
+                await this.logout(); 
+                console.log("Existing session terminated. Logging in again...");
+            }
+    
+            // Create a new session
+            const resp = await this.account.createEmailPasswordSession(email, password);
+            console.log(resp);
+            return resp;
         } catch (error) {
-            console.log("Login APPWRITE Error:: ",error)
+            console.log("login error::", error);
+            throw error; // Optionally re-throw the error if needed
         }
     }
+    
+
 
     async getCurrentUser() {
         try {
-            return await this.account.get();
+             const result =  await this.account.get();
+             return result;
         } catch (error) {
             console.log("Appwrite serive :: getCurrentUser :: error", error);
         }
@@ -56,17 +70,17 @@ export class AuthService {
     }
 
     async logout() {
-
         try {
-            await this.account.deleteSessions();
+            await this.account.deleteSessions();  // Terminate all sessions
+            console.log("User logged out successfully");
         } catch (error) {
-            console.log("Appwrite serive :: logout :: error", error);
+            console.log("Appwrite service :: logout :: error", error);
         }
     }
+    
 }
 
 const authService = new AuthService();
-
 
 export default authService
 
