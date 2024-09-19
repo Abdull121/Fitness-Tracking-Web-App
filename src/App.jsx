@@ -10,6 +10,7 @@ import Login from './pages/Login.jsx'
 import SignUp from './pages/SignUp.jsx'
 
 
+
 const router =  createBrowserRouter(
   createRoutesFromElements(
     
@@ -20,7 +21,15 @@ const router =  createBrowserRouter(
     <Route path='/' element={<Layout/>}>
 
           <Route path='' element={<Dashboard/>} />
-          <Route path='userprofile' element={<UserProfile/>}/>
+
+
+          <Route 
+          
+        
+          path='userprofile'
+           element={<UserProfile/>}/>
+
+
           <Route path='workout' element={<Workouts/>}/> 
           <Route path='progress' element={<Progress/>}/>
           <Route path='history' element={<History/>}/>

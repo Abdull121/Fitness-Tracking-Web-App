@@ -1,41 +1,79 @@
-import React from 'react'
-
-import {UserProfile,
-   GoalsProgress, 
-   WorkoutHistory,
-    ProgressCharts,
-     ExerciseSuggestions,
-     } from './index'
+import React from 'react';
+import { UserProfile, GoalsProgress, WorkoutHistory, ProgressCharts, ExerciseSuggestions } from './index';
+import service from '../Appwrite/config';
+import authService from '../Appwrite/auth';
 
 export default function Dashboard() {
+  const [profile, setProfile] = React.useState({
+    name: 'n/a',
+    age: 'n/a',
+    weight: 'n/a',
+    hight: 'n/a',
+    fitnessGoals: 'n/a',
+  });
+
+  const [loading, setLoading] = React.useState(true);
+
+  const getUserInformation = async () => {
+    try {
+      const userData = await authService.getCurrentUser();
+      const existingProfile = await service.getUserInformation(userData.$id);
+      console.log(existingProfile)
+
+      const { name = 'n/a', age = 'n/a', weight = 'n/a', hight = 'n/a', fitnessGoals = 'n/a' } = existingProfile;
+
+      // Update profile and set loading to false
+      setProfile({ name, age, weight, hight, fitnessGoals });
+    } catch (error) {
+      console.error('Error fetching user information:', error);
+    } finally {
+      setLoading(false); // Ensure loading is set to false in both success and error cases
+    }
+  };
+
+  React.useEffect(() => {
+    getUserInformation();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-100 text-gray-800 font-sans">
-      
-
       {/* Main Content */}
       <main className="max-w-10xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col md:flex-row">
-          
           {/* Dashboard Content */}
           <div className="flex-1 space-y-8 mt-8 md:mt-0">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <UserProfile />
-              <GoalsProgress title="Daily Goals" />
-              <GoalsProgress title="Weekly Goals" />
-            </div>
-            <WorkoutHistory />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <ProgressCharts />
-              <ProgressCharts />
-              <ExerciseSuggestions />
-            </div>
+            {loading ? (
+              <div className="flex justify-center items-center min-h-screen">
+                <div className="spinner-border text-indigo-600" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  <UserProfile
+                   name= {profile.name}
+                   age = {profile.age}
+                   weight={profile.weight}
+                   height={profile.hight}
+                   fitnessGoals={profile.fitnessGoals}
+                   />
+                  <GoalsProgress title="Daily Goals" />
+                  <GoalsProgress title="Weekly Goals" />
+                </div>
+                <WorkoutHistory />
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  <ProgressCharts />
+                  <ProgressCharts />
+                  <ExerciseSuggestions />
+                </div>
+              </>
+            )}
           </div>
         </div>
       </main>
 
       {/* Footer */}
-      
     </div>
-  )
+  );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header, Footer, SideBar } from './components/index';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, } from 'react-router-dom';
 import authService from './Appwrite/auth';
 import { Loader } from 'rsuite';
 import 'rsuite/dist/rsuite.min.css';
@@ -14,8 +14,9 @@ import 'rsuite/dist/rsuite.min.css';
 function Layout() {
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
-  // const [user, setUser] = React.useState(null);
+  
   const navigate = useNavigate();
+
 
    /**
    * Toggles the sidebar open and close state.
@@ -26,10 +27,10 @@ function Layout() {
 
   React.useEffect(() => {
     authService.getCurrentUser().then((userData) => {
-      // const data= true
+      
       if (userData) {
-        // setUser(userData);
-        navigate('/userprofile');
+    
+        navigate("/userprofile");
       } else {
         navigate('/login');
       }
