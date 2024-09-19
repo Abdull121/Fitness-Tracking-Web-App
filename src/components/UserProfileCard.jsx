@@ -1,8 +1,5 @@
 import React from 'react'
 import { User } from 'lucide-react'
-
-
-
 export default function UserProfile({
   name,
   age,
@@ -11,11 +8,6 @@ export default function UserProfile({
   fitnessGoals,
 
 }) {
-
-  
-
-
-
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
