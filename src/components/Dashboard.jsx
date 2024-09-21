@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserProfile, GoalsProgress, WorkoutHistory, ProgressCharts, ExerciseSuggestions } from './index';
+import { UserProfileCard, GoalsProgress, WorkoutHistory, ProgressCharts, ExerciseSuggestions } from './index';
 import service from '../Appwrite/config';
 import authService from '../Appwrite/auth';
 
@@ -51,7 +51,7 @@ export default function Dashboard() {
             ) : (
               <>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  <UserProfile
+                  <UserProfileCard
                    name= {profile.name}
                    age = {profile.age}
                    weight={profile.weight}

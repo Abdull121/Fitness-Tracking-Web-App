@@ -29,7 +29,7 @@ export default function UserProfile({
         </div>
         <div>
           <p className="text-3xl font-bold text-indigo-600"> {height}</p>
-          <p className="text-gray-600">Hight</p>
+          <p className="text-gray-600">Hight (inches)</p>
         </div>
         <div>
           <p className="text-2xl font-bold text-indigo-600"> {fitnessGoals}</p>

@@ -7,7 +7,7 @@ import WorkoutHistory from './WorkoutHistory';
 import DailyGoals from './DailyGoals'
 import GoalsProgress from './GoalsProgress'
 import ProgressCharts from './ProgressCharts'
-import UserProfile from './UserProfileCard'
+import UserProfileCard from './UserProfileCard'
 import ExerciseSuggestions from './ExerciseSuggestions';
 import UserProfileForm from './UserProfileForm';
 import Input from './Input'
@@ -26,7 +26,7 @@ export {
     DailyGoals,
     GoalsProgress,
     ProgressCharts,
-    UserProfile,
+    UserProfileCard,
     ExerciseSuggestions,
     UserProfileForm,
     Input,
