@@ -1,5 +1,5 @@
 import conf from '../conf/Conf';
-import { Client, ID, Databases, Storage } from "appwrite";
+import { Client, ID, Databases, Storage,Query } from "appwrite";
 
 export class Service{
     client = new Client();
@@ -18,7 +18,7 @@ export class Service{
         try {
             return await this.databases.createDocument(
                 conf.appwriteDatabaseId,
-                conf.appwriteCollectionId,
+                conf.appwriteUserInfoCollectionId,
                 docId,
                 
                 {
@@ -35,11 +35,17 @@ export class Service{
         }
     }
 
+
+
+   
+    
+    
+
     async updateUserProfile(docId, {name,age, weight, hight, fitnessGoals}){
         try {
             return await this.databases.updateDocument(
                 conf.appwriteDatabaseId,
-                conf.appwriteCollectionId,
+                conf.appwriteUserInfoCollectionId,
                 docId,
                 {
                     name,
@@ -57,12 +63,15 @@ export class Service{
 
    
 
-    async getUserInformation(docId){
+        async getUserInformation(collectionId,docId){
+
+            console.log("docId:", docId);
+        
         try {
             return await this.databases.getDocument(
                 conf.appwriteDatabaseId,
-                conf.appwriteCollectionId,
-                docId
+                collectionId,
+                docId,
             
             )
         } catch (error) {
@@ -71,20 +80,49 @@ export class Service{
         }
     }
 
-    // async getPosts(queries = [Query.equal("fitnessGoals", "active")]){
-    //     try {
-    //         return await this.databases.listDocuments(
-    //             conf.appwriteDatabaseId,
-    //             conf.appwriteCollectionId,
-    //             queries,
+
+
+     //ADD workout in the database
+
+     async addWorkout(userId,{ date, workout, duration, calories}) {
+        try {
+            // const formattedDate = new Date(date).toISOString();
+            return await this.databases.createDocument(
+                conf.appwriteDatabaseId,
+                conf.appwriteWorkOutCollectionId,
+                ID.unique(),
+                {
+                    Date: date,      
+                    Workout: workout,        
+                    Duration: duration, 
+                    userId,
+                    CaloriesBurned: calories ,
+                    
+
+                }
+            );
+        } catch (error) {
+            console.log("Appwrite service :: createWorkout :: error", error);
+        }
+    }
+
+
+        //get all workoutHistory BY user ID
+    async getAllWorkoutHistory(userId){
+        try {
+            return await this.databases.listDocuments(
+                conf.appwriteDatabaseId,
+                conf.appwriteWorkOutCollectionId,
+                 [Query.equal('userId', userId)]
+              
                 
 
-    //         )
-    //     } catch (error) {
-    //         console.log("Appwrite serive :: getPosts :: error", error);
-    //         return false
-    //     }
-    // }
+            )
+        } catch (error) {
+            console.log("Appwrite serive :: getPosts :: error", error);
+            return false
+        }
+    }
 
     // file upload service
 

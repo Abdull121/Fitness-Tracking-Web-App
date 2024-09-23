@@ -1,15 +1,53 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { CalendarIcon, Dumbbell, Clock, Flame } from 'lucide-react'
+import service from '../Appwrite/config'
+import authService from '../Appwrite/auth'
+import conf from '../conf/Conf'
+
+
+
 
 function WorkoutForm() {
   const { register, handleSubmit, reset, formState: { errors } } = useForm()
 
-  const onSubmit = (data) => {
+  
+
+  const onSubmit = async (data) => {
     console.log('Workout submitted:', data)
+    
+    try {
+
+       const currentUser = await authService.getCurrentUser()
+       if(currentUser){
+       const insertWorkout =  await service.addWorkout(currentUser.$id,{...data})
+       if(insertWorkout){
+        const listWorkout = await service.getAllWorkoutHistory(currentUser.$id)
+        console.log("List of Workout", listWorkout)
+        alert("workout added")
+       }
+       else{
+        alert("work out not added")
+       }
+       }
+       else{
+        alert("current user not Found")
+       }
+
+      
+      
+
+      
+    } catch (error) {
+      console.log(error)
+      
+    }
     // Here you would typically send the data to your backend
+
     reset()
   }
+
+ 
 
   return (
     <div className="w-full max-w-6xl mt-10 mx-auto bg-white p-6 rounded-lg shadow-xl overflow-hidden">

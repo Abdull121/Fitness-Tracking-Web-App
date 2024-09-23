@@ -2,6 +2,7 @@ import React from 'react';
 import { UserProfileCard, GoalsProgress, WorkoutHistory, ProgressCharts, ExerciseSuggestions } from './index';
 import service from '../Appwrite/config';
 import authService from '../Appwrite/auth';
+import conf from '../conf/Conf';
 
 export default function Dashboard() {
   const [profile, setProfile] = React.useState({
@@ -14,11 +15,13 @@ export default function Dashboard() {
 
   const [loading, setLoading] = React.useState(true);
 
-  const getUserInformation = async () => {
+  const getUserInfo = async () => {
     try {
       const userData = await authService.getCurrentUser();
-      const existingProfile = await service.getUserInformation(userData.$id);
-      console.log(existingProfile)
+       console.log("id",userData.$id)
+
+      const existingProfile = await service.getUserInformation(conf.appwriteUserInfoCollectionId,userData.$id);
+      console.log("existing profile DATA:: ",existingProfile)
 
       const { name = 'n/a', age = 'n/a', weight = 'n/a', hight = 'n/a', fitnessGoals = 'n/a' } = existingProfile;
 
@@ -32,7 +35,7 @@ export default function Dashboard() {
   };
 
   React.useEffect(() => {
-    getUserInformation();
+    getUserInfo();  
   }, []);
 
   return (

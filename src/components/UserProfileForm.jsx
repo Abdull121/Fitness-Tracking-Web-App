@@ -5,6 +5,7 @@ import { toast, ToastContainer, Slide } from 'react-toastify'; // Import react-t
 import 'react-toastify/dist/ReactToastify.css'; // Import toastify CSS
 import service from '../Appwrite/config';
 import authService from '../Appwrite/auth';
+import conf from '../conf/Conf';
 
 function UserProfileForm() {
   const { register, handleSubmit, setValue, formState: { errors } } = useForm();
@@ -33,6 +34,7 @@ function UserProfileForm() {
       } else {
         // Create profile
         
+        
         const dbUserProfileInfo = await service.createUserProfile({ ...data, docId: userData.$id });
         console.log("document response:: ", dbUserProfileInfo);
 
@@ -58,7 +60,7 @@ function UserProfileForm() {
     try {
       
       const userData = await authService.getCurrentUser();
-      const existingProfile = await service.getUserInformation(userData.$id);
+      const existingProfile = await service.getUserInformation(conf.appwriteUserInfoCollectionId,userData.$id);
       if (existingProfile) {
         setIsEdit(true); // If profile exists, set to edit mode
         setValue("name", existingProfile.name);

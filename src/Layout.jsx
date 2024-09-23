@@ -10,7 +10,7 @@ function Layout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [loading, setLoading] = useState(true); // State to track loading
   const [isLogin, setIsLogin] = useState(null); // Initially null to distinguish between not fetched and no user
-  const [existingData, setExistingData] = useState(null);
+  // const [existingData, setExistingData] = useState(null);
   const navigate = useNavigate();
 
   // Effect to handle user login and data fetching
@@ -20,14 +20,12 @@ function Layout() {
         const userData = await authService.getCurrentUser();
         if (userData) {
           setIsLogin(userData); // Set user data once retrieved
-          const existData = await service.getUserInformation(userData.$id);
-          if (existData) {
-            setExistingData(existData); // Set existing data if available
-          }
+          
         } else {
-          navigate("/login"); // If no user, navigate to login
+          navigate("/login"); 
         }
       } catch (error) {
+        console.log(error)
         navigate("/login"); // Handle errors by redirecting to login
       } finally {
         setLoading(false); // Stop loading when finished
