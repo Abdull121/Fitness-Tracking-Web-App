@@ -1,6 +1,12 @@
 import React, { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { Flame, Footprints, Clock } from "lucide-react";
+import service from "../Appwrite/config";
+
+import authService from '../Appwrite/auth'
+
+import conf from "../conf/Conf";
+
 
 function DailyGoals({
   tittle = "Daily Goals",
@@ -30,7 +36,79 @@ function DailyGoals({
     },
   });
 
-  const onSubmit = (data) => {
+  const [button, setButton]= React.useState(false)
+
+
+  const handleData=  async(data)=>{
+    try {
+      // Send data to backend
+      // console.log(data)
+      
+     
+      const currentUser =  await authService.getCurrentUser() //get the user id
+      if(currentUser) {
+        const existingUserData = await service.getUserInformation(conf.appwriteDailyGoalsCollectionId, currentUser.$id)
+
+        if(existingUserData){
+
+          setButton(true)  //update show in the button
+
+          if(data){
+            const updateGoals =  await service.updateGoals(currentUser.$id,{...data})
+            if(updateGoals){
+              alert("Daily Goal is Updated!")
+              
+            }
+            else{
+              alert("Failed to updated Goals!")
+  
+            }
+
+
+          }
+
+         
+
+        }
+
+        else{
+
+          //set new goals
+
+          setButton(false) // Add show in the button
+
+          if(data){
+
+            const progressAdd =   await service.DailyGoals(currentUser.$id,{...data})
+            if(progressAdd){
+              alert("Daily goals Added")
+            }
+            else{
+              alert("Daily goals not Added")
+            }
+    
+            console.log("data is ::", progressAdd )
+            
+          }
+
+       
+        }
+
+        
+
+      }
+
+    
+    
+  } catch (error) {
+    console.log(error)
+  }
+  }
+
+
+
+
+  const onSubmit = async (data) => {
     if (data.stepsTaken > data.targetSteps) {
       setValue("stepsTaken", data.targetSteps);
       alert("Steps taken cannot exceed target Steps. Adjusting value.");
@@ -55,7 +133,14 @@ function DailyGoals({
 
     console.log("Progress updated:", data);
 
-    //TODO: Send data to backend
+
+    // send  data  to backend 
+
+        handleData(data)
+
+    
+
+   
   };
 
   const caloriesBurned = watch("caloriesBurned");
@@ -83,7 +168,16 @@ function DailyGoals({
   );
 
   // Validate steps, calories and time inputs
+  React.useEffect(()=>{
+
+    handleData()
+
+  },[])
+
   React.useEffect(() => {
+
+   
+
     if (stepsTaken > targetSteps) {
       setError("stepsTaken", {
         type: "manual",
@@ -341,7 +435,8 @@ function DailyGoals({
             type="submit"
             className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            Update Progress
+          {button ? "Update Progress":"Add Progress"}
+            
           </button>
         </div>
       </form>

@@ -65,7 +65,7 @@ export class Service{
 
         async getUserInformation(collectionId,docId){
 
-            console.log("docId:", docId);
+            //console.log("docId:", docId);
         
         try {
             return await this.databases.getDocument(
@@ -123,6 +123,72 @@ export class Service{
             return false
         }
     }
+
+
+            // Add Daily Goals
+
+            async DailyGoals(docId, {
+                caloriesBurned,
+                outOfCaloriesBurned,
+                stepsTaken,
+                targetSteps,
+                SpendWorkoutTime, 
+                outOfWorkoutTime,
+            }) {
+                try {
+                    return await this.databases.createDocument(
+                        conf.appwriteDatabaseId,
+                        conf.appwriteDailyGoalsCollectionId,
+                        docId,
+                        {
+                            caloriesBurned,                
+                            outOfCaloriesBurned,
+                            stepsTaken,
+                            targetSteps,
+                            spendWorkoutTimeMinutes: SpendWorkoutTime,
+                            outOfWorkoutTimeMinutes: outOfWorkoutTime,
+                        }
+                    );
+                } catch (error) {
+                    console.log("Appwrite service :: DailyGoals :: error", error);
+                }
+            }
+
+
+            //<--update Goals-->
+
+
+            async updateGoals(docId, {caloriesBurned,
+                outOfCaloriesBurned,
+                stepsTaken,
+                targetSteps,
+                SpendWorkoutTime, 
+                outOfWorkoutTime,}){
+                try {
+                    return await this.databases.updateDocument(
+                        conf.appwriteDatabaseId,
+                        conf.appwriteDailyGoalsCollectionId,
+                        docId,
+                        {
+                            caloriesBurned,                
+                            outOfCaloriesBurned,
+                            stepsTaken,
+                            targetSteps,
+                            spendWorkoutTimeMinutes: SpendWorkoutTime,
+                            outOfWorkoutTimeMinutes: outOfWorkoutTime,
+        
+                        }
+                    )
+                } catch (error) {
+                    console.log("Appwrite service :: updateGoals :: error", error);
+                }
+            }
+        
+            
+
+
+
+
 
     // file upload service
 

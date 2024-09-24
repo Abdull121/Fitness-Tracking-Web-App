@@ -1,7 +1,41 @@
 import React from 'react'
 import { Target, Footprints, Clock } from 'lucide-react'
+import authService from '../Appwrite/auth'
+import service from '../Appwrite/config'
+import conf from '../conf/Conf'
 
-export default function GoalsProgress({ title }) {
+export default function GoalsProgress({ 
+  title="n/a",
+  
+ }) {
+
+
+  const getUserData =  async()=>{
+    try {
+      const currentUser =  await authService.getCurrentUser() //get the user id
+      if(currentUser) {
+        const existingUserData = await service.getUserInformation(conf.appwriteDailyGoalsCollectionId, currentUser.$id)
+
+        if(existingUserData){
+          console.log("daily goal data",existingUserData)
+        }
+        else{
+          alert("data is not found")
+        }
+
+      }
+      
+    } catch (error) {
+      console.log(error)
+      
+    }
+  }
+
+  React.useEffect(()=>{
+    getUserData()
+  })
+
+
   const goals = [
     { name: 'Calories Burned', current: 1200, target: 1500, icon: Target },
     { name: 'Steps Taken', current: 8500, target: 10000, icon: Footprints },
