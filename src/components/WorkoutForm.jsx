@@ -3,7 +3,8 @@ import { useForm } from 'react-hook-form'
 import { CalendarIcon, Dumbbell, Clock, Flame } from 'lucide-react'
 import service from '../Appwrite/config'
 import authService from '../Appwrite/auth'
-import conf from '../conf/Conf'
+import { toast, ToastContainer, Slide } from 'react-toastify'; // Import react-toastify
+import 'react-toastify/dist/ReactToastify.css'; // Import toastify CSS
 
 
 
@@ -22,16 +23,15 @@ function WorkoutForm() {
        if(currentUser){
        const insertWorkout =  await service.addWorkout(currentUser.$id,{...data})
        if(insertWorkout){
-        const listWorkout = await service.getAllWorkoutHistory(currentUser.$id)
-        console.log("List of Workout", listWorkout)
-        alert("workout added")
+       
+        toast.success("Workout Added successfully!"); // Toast notification for success
        }
        else{
-        alert("work out not added")
+        toast.error("Failed to Add Workout."); // Toast notification for failure
        }
        }
        else{
-        alert("current user not Found")
+        toast.error("user not found."); // Toast notification for failure
        }
 
       
@@ -51,6 +51,21 @@ function WorkoutForm() {
 
   return (
     <div className="w-full max-w-6xl mt-10 mx-auto bg-white p-6 rounded-lg shadow-xl overflow-hidden">
+
+<ToastContainer
+        position="top-center"
+        autoClose={3000}          
+        hideProgressBar={true}    
+        newestOnTop={false}       
+        closeOnClick={true}      
+        rtl={false}               
+        pauseOnFocusLoss={true}   
+        draggable={true}          
+        pauseOnHover={true}       
+        theme="light"             
+        transition={Slide}        
+      />{/* Toast container to display notifications */}
+
       <h2 className="text-2xl font-bold text-blue-600 mb-6">Add Workout</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>

@@ -6,3 +6,24 @@ a {
     text-decoration: none !important;
   }
   
+
+  html, body {
+    height: 100%; /* Ensure the body takes the full viewport height */
+    margin: 0;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Full height of the viewport */
+}
+
+main {
+    flex-grow: 1; /* Ensure main content grows to take available space */
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    flex-shrink: 0; /* Prevent footer from shrinking */
+}
