@@ -61,8 +61,8 @@ export default function Dashboard() {
                    height={profile.hight}
                    fitnessGoals={profile.fitnessGoals}
                    />
-                  <GoalsProgress title="Daily Goals" />
-                  <GoalsProgress title="Weekly Goals" />
+                  <GoalsProgress tittle="Daily Goals" />
+                  <GoalsProgress tittle="Weekly Goals" />
                 </div>
                 <WorkoutHistory />
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

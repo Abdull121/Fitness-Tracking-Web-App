@@ -155,7 +155,7 @@ export class Service{
             }
 
 
-            //<--update Goals-->
+            //<--update Daily Goals-->
 
 
             async updateGoals(docId, {caloriesBurned,
@@ -183,6 +183,69 @@ export class Service{
                     console.log("Appwrite service :: updateGoals :: error", error);
                 }
             }
+
+
+            //weekly Goals
+
+            async weeklyGoals(docId, {
+                caloriesBurned,
+                outOfCaloriesBurned,
+                stepsTaken,
+                targetSteps,
+                spendWorkoutTimeMinutes, 
+                outOfWorkoutTimeMinutes,
+            }) {
+                try {
+                    return await this.databases.createDocument(
+                        conf.appwriteDatabaseId,
+                        conf.appwriteWeeklyGoalsCollectionId,
+                        docId,
+                        {
+                            caloriesBurned,                
+                            outOfCaloriesBurned:outOfCaloriesBurned,
+                            stepsTaken,
+                            targetSteps,
+                            spendWorkoutTimeMinutes,
+                            outOfWorkoutTimeMinutes,
+                        }
+                    );
+                } catch (error) {
+                    console.log("Appwrite service :: weeklyGoals :: error", error);
+                }
+            }
+
+
+              
+
+
+
+
+              //<--update Weekly Goals-->
+
+
+              async updateWeeklyGoals(docId, {
+                caloriesBurned,
+                stepsTaken,
+                spendWorkoutTimeMinutes, 
+               }){
+                try {
+                    return await this.databases.updateDocument(
+                        conf.appwriteDatabaseId,
+                        conf.appwriteWeeklyGoalsCollectionId,
+                        docId,
+                        {
+                            caloriesBurned,                
+                            stepsTaken,
+                            spendWorkoutTimeMinutes,
+                            
+        
+                        }
+                    )
+                } catch (error) {
+                    console.log("Appwrite service :: updateGoals :: error", error);
+                }
+            }
+
         
             
 
