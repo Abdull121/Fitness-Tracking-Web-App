@@ -1,6 +1,8 @@
 import React from 'react'
 import {DailyGoals} from '../components/index'
 
+
+
 function Progress() {
   return (
     <div>
@@ -16,17 +18,7 @@ function Progress() {
 
       />
 
-{/* 
-      <DailyGoals
-          tittle="weekly Goals"
-          burnedCalories= "800"
-          TargetCalories="1500"
-          currentSteps= "1000"
-          TotalSteps= "1600"
-          spendWorkout= "150"
-          workoutTime="300" 
 
-      /> */}
 
     </div>
     
@@ -36,3 +28,5 @@ function Progress() {
 }
 
 export default Progress
+
+

@@ -11,6 +11,14 @@ import SignUp from './pages/SignUp.jsx'
 
 
 
+
+
+// import React, { useRef } from 'react';
+// import { DailyGoals } from './components/index.js';
+// import GoalsProgress from './components/GoalsProgress.jsx';
+
+
+
 const router =  createBrowserRouter(
   createRoutesFromElements(
     
@@ -36,11 +44,26 @@ const router =  createBrowserRouter(
 
 
 function App() {
+
+  // const weeklyGoalsRef = useRef();
+
+  // const handleProgressUpdate = () => {
+  //   if (weeklyGoalsRef.current) {
+  //     weeklyGoalsRef.current.updateWeeklyGoals();
+  //   }
+  // };
   
 
   return (
     <>
     <RouterProvider router={router} />
+
+    {/* <div className="App">
+      <DailyGoals onProgressUpdate={handleProgressUpdate} />
+      <GoalsProgress ref={weeklyGoalsRef} />
+    </div> */}
+
+    
     </>
   )
 }
