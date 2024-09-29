@@ -9,6 +9,7 @@ function WorkoutHistory({
   marginTop = '',
   marginLR = '',
   renderHistory = false,
+  
 }) {
   const [workouts, setWorkouts] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
@@ -29,7 +30,7 @@ function WorkoutHistory({
         const listWorkout = await service.getAllWorkoutHistory(currentUser.$id);
         if (listWorkout) {
           setWorkouts(listWorkout.documents);
-          setLoading(false);
+           setLoading(false);
         } else {
           alert('Workout list not found');
         }
@@ -37,10 +38,13 @@ function WorkoutHistory({
     } catch (error) {
       console.log(error.message);
     }
+   
   };
 
   React.useEffect(() => {
     getAllworkout();
+    
+    
   }, []);
 
   const firstFiveHistory = workouts.slice(0, 5);
