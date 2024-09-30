@@ -52,7 +52,7 @@ function WorkoutHistory({
 
   return (
     <div
-      className={`bg-white p-6 rounded-lg shadow-md overflow-x-auto ${width} ${marginTop} ${marginLR}`}
+      className={`bg-white p-6 mt-8 rounded-lg shadow-md overflow-x-auto ${width} ${marginTop} ${marginLR}`}
     >
       {loading ? (
         <div className="flex justify-center items-center h-full">

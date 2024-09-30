@@ -4,6 +4,8 @@ import service from '../Appwrite/config';
 import authService from '../Appwrite/auth';
 import conf from '../conf/Conf';
 
+import { Loader } from 'rsuite';
+
 export default function Dashboard() {
   const [profile, setProfile] = React.useState({
     name: 'n/a',
@@ -29,16 +31,19 @@ export default function Dashboard() {
       setProfile({ name, age, weight, hight, fitnessGoals });
     } catch (error) {
       console.error('Error fetching user information:', error);
-    } finally {
-      
-           setLoading(false);
-      
-       
-    }
+    } 
   };
+
+  setTimeout(() => {
+    setLoading(false)
+    
+  }, 2500);
+
 
   React.useEffect(() => {
     getUserInfo();  
+
+
   }, []);
 
   return (
@@ -48,33 +53,51 @@ export default function Dashboard() {
         <div className="flex flex-col md:flex-row">
           {/* Dashboard Content */}
           <div className="flex-1 space-y-8 mt-8 md:mt-0">
-            {loading ? (
-              <div className="flex justify-center items-center min-h-screen">
-                <div className="spinner-border text-indigo-600" role="status">
-                  <span className="visually-hidden">Loading...</span>
-                </div>
-              </div>
-            ) : (
-              <>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          {loading ? ( <div className="flex justify-center items-center min-h-screen ">
+        {/* <Loader size="md" /> */}
+        <div className="spinner-border text-indigo-600" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+
+        </div>):""}
+            
+
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
+                {loading? "":(<>
+
                   <UserProfileCard
                    name= {profile.name}
                    age = {profile.age}
                    weight={profile.weight}
                    height={profile.hight}
-                   fitnessGoals={profile.fitnessGoals}
-                   />
-                  <GoalsProgress tittle="Daily Goals" />
-                  <GoalsProgress tittle="Weekly Goals" />
+                   fitnessGoals={profile.fitnessGoals}/>
+                   </>)}
+                    <div className= {loading ? ('hidden'):("contents")}>
+                    <GoalsProgress tittle="Daily Goals" />
+                    <GoalsProgress tittle="Weekly Goals" />
+                    </div>
+
                 </div>
-                <WorkoutHistory />
+
+                <div className= {loading ? ('hidden'):("contents ")}>
+                <WorkoutHistory/>
+                </div>
+                
+               
+                
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  <ProgressCharts />
+
+                <div className= {loading ? ('hidden'):("contents ")}>
+                <ProgressCharts />
                   <ProgressCharts />
                   <ExerciseSuggestions />
                 </div>
-              </>
-            )}
+                  
+                </div>
+              
+        
           </div>
         </div>
       </main>
@@ -86,91 +109,3 @@ export default function Dashboard() {
 
 
 
-// import React, { useState, useEffect } from 'react';
-// import { UserProfileCard, GoalsProgress, WorkoutHistory, ProgressCharts, ExerciseSuggestions } from './index';
-// import service from '../Appwrite/config';
-// import authService from '../Appwrite/auth';
-// import conf from '../conf/Conf';
-// import { Loader } from 'rsuite';
-
-// export default function Dashboard() {
-//   const [profile, setProfile] = useState({
-//     name: 'n/a',
-//     age: 'n/a',
-//     weight: 'n/a',
-//     height: 'n/a',
-//     fitnessGoals: 'n/a',
-//   });
-
-//   const [loading, setLoading] = useState(true);
-//   const [componentsLoaded, setComponentsLoaded] = useState({
-//     profile: true,
-//     dailyGoals: false,
-//     weeklyGoals: false,
-//     workoutHistory: false,
-//   });
-
-//   const getUserInfo = async () => {
-//     try {
-//       const userData = await authService.getCurrentUser();
-//       const existingProfile = await service.getUserInformation(conf.appwriteUserInfoCollectionId, userData.$id);
-//       const { name = 'n/a', age = 'n/a', weight = 'n/a', height = 'n/a', fitnessGoals = 'n/a' } = existingProfile;
-//       setProfile({ name, age, weight, height, fitnessGoals });
-//       setComponentsLoaded(prev => ({ ...prev, profile: true }));
-//     } catch (error) {
-//       console.error('Error fetching user information:', error);
-//     }
-//   };
-
-//   const handleComponentLoaded = (componentName) => {
-//     console.log(`${componentName} loaded`);
-//     setComponentsLoaded(prev => ({ ...prev, [componentName]: true }));
-//   };
-  
-
-//   useEffect(() => {
-//     getUserInfo();
-//   }, []);
-
-//   useEffect(() => {
-//     if (Object.values(componentsLoaded).every(Boolean)) {
-//       setLoading(false);
-//     }
-//   }, [componentsLoaded]);
-
-//   return (
-//     <div className="min-h-screen bg-gray-100 text-gray-800 font-sans">
-//       <main className="max-w-10xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-//         <div className="flex flex-col md:flex-row">
-//           <div className="flex-1 space-y-8 mt-8 md:mt-0">
-//             {loading ? (
-//               <div className="flex justify-center items-center min-h-screen">
-//                 <Loader size="lg" />
-//               </div>
-//             ) : (
-//               <>
-//                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-//                   <UserProfileCard
-//                     name={profile.name}
-//                     age={profile.age}
-//                     weight={profile.weight}
-//                     height={profile.height}
-//                     fitnessGoals={profile.fitnessGoals}
-//                   />
-//                   <GoalsProgress title="Daily Goals" onLoaded={() => handleComponentLoaded('dailyGoals')} />
-//                   <GoalsProgress title="Weekly Goals" onLoaded={() => handleComponentLoaded('weeklyGoals')} />
-//                 </div>
-//                 <WorkoutHistory onLoaded={() => handleComponentLoaded('workoutHistory')} />
-//                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-//                   <ProgressCharts />
-//                   <ProgressCharts  />
-//                   <ExerciseSuggestions  />
-//                 </div>
-//               </>
-//             )}
-//           </div>
-//         </div>
-//       </main>
-//     </div>
-//   );
-// }

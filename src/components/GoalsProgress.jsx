@@ -68,7 +68,7 @@ export default function GoalsProgress({ tittle = "n/a" ,}) {
   const resetWeeklyGoals = async () => {
     const currentDay = new Date().getDay(); // Get the current day (0 is Sunday)
 
-    if (currentDay === 1) {
+    if (currentDay === 0) {
       try {
         const currentUser = await authService.getCurrentUser();
         const resetData = {
