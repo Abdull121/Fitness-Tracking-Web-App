@@ -5,6 +5,7 @@ import authService from '../Appwrite/auth';
 import conf from '../conf/Conf';
 
 import { Loader } from 'rsuite';
+import Pichart from './Pichart';
 
 export default function Dashboard() {
   const [profile, setProfile] = React.useState({
@@ -20,10 +21,10 @@ export default function Dashboard() {
   const getUserInfo = async () => {
     try {
       const userData = await authService.getCurrentUser();
-       console.log("id",userData.$id)
+      
 
       const existingProfile = await service.getUserInformation(conf.appwriteUserInfoCollectionId,userData.$id);
-      console.log("existing profile DATA:: ",existingProfile)
+      
 
       const { name = 'n/a', age = 'n/a', weight = 'n/a', hight = 'n/a', fitnessGoals = 'n/a' } = existingProfile;
 
@@ -91,7 +92,7 @@ export default function Dashboard() {
 
                 <div className= {loading ? ('hidden'):("contents ")}>
                 <ProgressCharts />
-                  <ProgressCharts />
+                  <Pichart />
                   <ExerciseSuggestions />
                 </div>
                   

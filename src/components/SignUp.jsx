@@ -120,10 +120,17 @@ export default function SignInForm() {
                 name="password"
                 type={showPassword ? "text" : "password"}
                 autoComplete="current-password"
-                {...register("password", { required: "Password is required" })}
+                {...register("password", { required: "Password is required",
+                    minLength:{
+                      value:8,
+                     message: "Password must be at least 8 characters long"
+                    }
+                
+                
+                 })}
                 className="appearance-none relative block  px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
-              />
+              />  
               <button
                 type="button"
                 className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"

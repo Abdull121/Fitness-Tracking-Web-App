@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+
 
 import React, { useState, useEffect } from 'react';
 import { Target, Footprints, Clock } from 'lucide-react';
@@ -13,6 +15,8 @@ export default function GoalsProgress({ tittle = "n/a" ,}) {
 
 
   const fetchData = React.useCallback( async(userId)=>{
+
+    // console.log("callback calling...")
 
     try {
 
@@ -43,7 +47,7 @@ export default function GoalsProgress({ tittle = "n/a" ,}) {
     }
     
 
-  },[])
+  },[tittle])
   
 
   React.useEffect(()=>{
@@ -59,8 +63,8 @@ export default function GoalsProgress({ tittle = "n/a" ,}) {
 
   },[fetchData, ])
 
-  console.log("dailyGoals data::", dailyData)
-  console.log("weeklyGoals data::", weeklyData)
+  // console.log("dailyGoals data::", dailyData)
+  // console.log("weeklyGoals data::", weeklyData)
  
   
 

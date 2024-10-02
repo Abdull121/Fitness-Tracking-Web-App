@@ -25,7 +25,7 @@ export default function UserProfile({
         </div>
         <div>
           <p className="text-3xl font-bold text-indigo-600">{weight}</p>
-          <p className="text-gray-600">weight</p>
+          <p className="text-gray-600">weight (kg)</p>
         </div>
         <div>
           <p className="text-3xl font-bold text-indigo-600"> {height}</p>
