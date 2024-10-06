@@ -10,7 +10,10 @@ const conf= {
     appwriteWorkOutCollectionId: import.meta.env.VITE_APPWRITE_WORKOUT_COLLECTION_ID,
 
     appwriteDailyGoalsCollectionId: import.meta.env.VITE_APPWRITE_DAILYGOALS_COLLECTION_ID,
+
     appwriteWeeklyGoalsCollectionId: import.meta.env.VITE_APPWRITE_WEEKLYGOALS_COLLECTION_ID,
+
+    appwriteWeightProgressCollectionId: import.meta.env.VITE_APPWRITE_WEIGHTPROGRESS_COLLECTION_ID,
 
 
 

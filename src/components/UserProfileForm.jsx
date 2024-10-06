@@ -18,13 +18,22 @@ function UserProfileForm() {
   const onSubmit = useCallback(async (data) => {
     setLoading(true); // Start loading when submitting
     try {
-      console.log('Form submitted:', data);
+      // console.log('Form submitted:', data);
       const userData = await authService.getCurrentUser();
+      if(userData){
+       const weightAdd= await service.addWeight(data.weight,userData.$id )
+       if(weightAdd){
+        console.log("weight",weightAdd )
+       }
+       else{
+        console.log("failed to add weight progress!")
+       }
+      }
 
       if (isEdit) {
         // Update profile
         const dbUpdateProfileInfo = await service.updateUserProfile(userData.$id, { ...data });
-        console.log("document Update response:: ", dbUpdateProfileInfo);
+        // console.log("document Update response:: ", dbUpdateProfileInfo);
 
         if (dbUpdateProfileInfo) {
           toast.success("Profile updated successfully!"); // Toast notification for success
@@ -36,7 +45,7 @@ function UserProfileForm() {
         
         
         const dbUserProfileInfo = await service.createUserProfile({ ...data, docId: userData.$id });
-        console.log("document response:: ", dbUserProfileInfo);
+        // console.log("document response:: ", dbUserProfileInfo);
 
         if (dbUserProfileInfo) {
           toast.success("Profile created successfully!");

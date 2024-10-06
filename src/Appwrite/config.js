@@ -246,6 +246,46 @@ export class Service{
                 }
             }
 
+
+
+            // weight progress Adding weight
+
+
+            async addWeight(weight,userId){
+                try {
+                    return await this.databases.createDocument(
+                        conf.appwriteDatabaseId,
+                        conf.appwriteWeightProgressCollectionId,
+                        ID.unique(),
+                        
+                        {
+                            weight,
+                            userId,
+                        }
+                    )
+                } catch (error) {
+                    console.log("Appwrite service :: Adding Weight :: error", error);
+                }
+            }
+
+
+            // get weight data
+
+            async getAllWeights(userId){
+                try {
+                    return await this.databases.listDocuments(
+                        conf.appwriteDatabaseId,
+                        conf.appwriteWeightProgressCollectionId,
+                         [Query.equal('userId', userId)]
+                      
+                        
+        
+                    )
+                } catch (error) {
+                    console.log("Appwrite service :: getWeight :: error", error);
+                    return false
+                }
+            }
         
             
 
@@ -268,18 +308,7 @@ export class Service{
     //     }
     // }
 
-    // async deleteFile(fileId){
-    //     try {
-    //         await this.bucket.deleteFile(
-    //             conf.appwriteBucketId,
-    //             fileId
-    //         )
-    //         return true
-    //     } catch (error) {
-    //         console.log("Appwrite serive :: deleteFile :: error", error);
-    //         return false
-    //     }
-    // }
+    
 
     // getFilePreview(fileId){
     //     return this.bucket.getFilePreview(
