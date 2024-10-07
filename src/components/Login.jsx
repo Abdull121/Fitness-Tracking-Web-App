@@ -6,6 +6,8 @@ import Input from './Input'
 import { Link ,useNavigate} from 'react-router-dom'
 import authService from '../Appwrite/auth'
 
+import { Dumbbell} from 'lucide-react';
+
 
 export default function SignInForm() {
   const { register, handleSubmit, formState: { errors } } = useForm()
@@ -19,15 +21,15 @@ export default function SignInForm() {
     setError(""); // Clear any previous error messages
   
     try {
-       console.log('Sign in attempt:', data);
+      // console.log('Sign in attempt:', data);
   
       const session = await authService.login(data); 
 
-      console.log("sessions:: ", session)
+      //console.log("sessions:: ", session)
   
       if (session) {
         const userData = await authService.getCurrentUser();
-        console.log("user login response:: ",userData)
+       // console.log("user login response:: ",userData)
         
         if (userData) {
           // Navigate to the dashboard if user data exists
@@ -52,27 +54,19 @@ export default function SignInForm() {
     }
   };
   
-//   const login = async(data) => {
-//     setError("")
-//     try {
-//         const session = await authService.login(data)
-//         if (session) {
-//             const userData = await authService.getCurrentUser()
-//             if(userData) dispatch(authLogin(userData));
-//             navigate("/")
-//         }
-//     } catch (error) {
-//         setError(error.message)
-//     }
-// }
+
 
   
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
+      <div className='flex justify-center items-center'>
+          <Dumbbell className="h-14 w-14 mr-3 text-blue-600" />
+          <h1 className="text-4xl font-bold text-blue-600">Fitness World</h1>
+        </div>
         <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in</h2>
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign In</h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             Stay updated on your fitness journey
           </p>

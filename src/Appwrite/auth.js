@@ -34,13 +34,13 @@ export class AuthService {
             }
     
             // Debugging: Log the email and password
-            console.log("Logging in with email:", email, password);
+            //console.log("Logging in with email:", email, password);
     
             // Check for active sessions
             const currentUser = await this.getCurrentUser();
     
             if (currentUser) {
-                console.log("Session already active for user:", currentUser);
+                //console.log("Session already active for user:", currentUser);
                 // Optionally log out before logging in again
                 await this.logout(); 
                 console.log("Existing session terminated. Logging in again...");
@@ -48,7 +48,7 @@ export class AuthService {
     
             // Create a new session
             const resp = await this.account.createEmailPasswordSession(email, password);
-            console.log(resp);
+           // console.log(resp);
             return resp;
         } catch (error) {
             console.log("login error::", error);

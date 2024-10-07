@@ -5,6 +5,8 @@ import Input from './Input'
 import { Link,useNavigate } from 'react-router-dom'
 import authService from '../Appwrite/auth'
 
+import { Dumbbell} from 'lucide-react';
+
 
 export default function SignInForm() {
   const { register, handleSubmit, formState: { errors } } = useForm()
@@ -23,17 +25,7 @@ export default function SignInForm() {
          console.log(response)
           navigate("/login")
           
-        //  const currentUser =  await authService.getCurrentUser();
-
-        //  console.log("getCurrentuserDATA:: ",currentUser) 
-
-
-        // if (currentUser) {
-        //   console.log('User created and logged in:', currentUser);
-        //   navigate("/"); // Redirect to home page
-        // } else {
-        //   throw new Error("User account was created, but fetching user data failed.");
-        // }
+        
        
     } catch (error) {
       console.log("Signup error:", error);
@@ -43,94 +35,70 @@ export default function SignInForm() {
   
 
 
-//   const create = async(data) => {
-//     setError("")
-//     try {
-//         const userData = await authService.createAccount(data)
-//         if (userData) {
-//             const userData = await authService.getCurrentUser()
-//             if(userData) dispatch(login(userData));
-//             navigate("/")
-//         }
-//     } catch (error) {
-//         setError(error.message)
-//     }
-// }
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
+        <div className='flex justify-center items-center'>
+          <Dumbbell className="h-14 w-14 mr-3 text-blue-600" />
+          <h1 className="text-4xl font-bold text-blue-600">Fitness World</h1>
+        </div>
         <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Create your account</h2>
+          <h2 className="mt-5 text-center text-3xl font-extrabold text-gray-900">Create your account</h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             Stay updated on your fitness journey
           </p>
         </div>
+        
         <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div className="rounded-md shadow-sm space-y-4">
-
-
-
-
-          <div>
-
-              <Input 
-                label="Name: "
+            <div>
+              <Input
+                label="Name:"
                 placeholder="Enter your Name"
                 type="name"
                 {...register("name", {
-                    required: "name is Required"
+                  required: "name is Required"
                 })}
-
                 className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-              
               />
               {errors.name && <p className="mt-2 text-sm text-red-600">{errors.name.message}</p>}
             </div>
-
-
-
+            
             <div>
-
-              <Input 
-                label="Email: "
-                 placeholder="Enter your email"
+              <Input
+                label="Email:"
+                placeholder="Enter your email"
                 type="email"
                 autoComplete="email"
                 {...register("email", {
-                    required: "Email is Required",
-                    validate: {
-                        matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
-                        "Email address must be a valid address",
-                    }
+                  required: "Email is Required",
+                  validate: {
+                    matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
+                      "Email address must be a valid address",
+                  }
                 })}
-
                 className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-              
               />
               {errors.email && <p className="mt-2 text-sm text-red-600">{errors.email.message}</p>}
             </div>
-
-
+            
             <div className="relative">
-              
-              <Input 
+              <Input
                 label="password"
                 id="password"
                 name="password"
                 type={showPassword ? "text" : "password"}
                 autoComplete="current-password"
-                {...register("password", { required: "Password is required",
-                    minLength:{
-                      value:8,
-                     message: "Password must be at least 8 characters long"
-                    }
-                
-                
-                 })}
-                className="appearance-none relative block  px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 8,
+                    message: "Password must be at least 8 characters long"
+                  }
+                })}
+                className="appearance-none relative block px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
-              />  
+              />
               <button
                 type="button"
                 className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
@@ -141,8 +109,7 @@ export default function SignInForm() {
               {errors.password && <p className="mt-2 text-sm text-red-600">{errors.password.message}</p>}
             </div>
           </div>
-
-        
+          
           <div>
             <button
               type="submit"
@@ -151,22 +118,22 @@ export default function SignInForm() {
               Create account
             </button>
           </div>
+          
           <div className="text-center text-red-600">
-              {error && <p>{error}</p>}
+            {error && <p>{error}</p>}
           </div>
-
+          
           <div className="text-center">
-          <p className="mt-2 text-sm text-gray-600">
-            Already have an account?{' '}
-            <Link to = "/login" className="font-medium text-blue-600 hover:text-blue-500">
-              Sign in
-            </Link>
-          </p>
-        </div>
+            <p className="mt-2 text-sm text-gray-600">
+              Already have an account?{' '}
+              <Link to="/login" className="font-medium text-blue-600 hover:text-blue-500">
+                Sign in
+              </Link>
+            </p>
+          </div>
         </form>
-
-        
       </div>
     </div>
-  )
+  );
+  
 }

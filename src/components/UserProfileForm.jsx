@@ -182,8 +182,9 @@ function UserProfileForm() {
 
   return (
     <div className="w-full max-w-6xl mt-10 mx-auto bg-white p-8 rounded-lg shadow-xl">
-      <ToastContainer
-        position="top-center"
+
+        <ToastContainer
+        position="top-right"
         autoClose={3000}          
         hideProgressBar={true}    
         newestOnTop={false}       
@@ -192,9 +193,9 @@ function UserProfileForm() {
         pauseOnFocusLoss={true}   
         draggable={true}          
         pauseOnHover={true}       
-        theme="light"             
-        transition={Slide}        
-      />{/* Toast container to display notifications */}
+        theme="light" 
+        transition= {Slide}/>  
+     
       <div className="flex justify-center mb-8">
         <div className="w-32 h-32 bg-indigo-100 rounded-full flex items-center justify-center">
           <User size={64} className="text-indigo-600" />

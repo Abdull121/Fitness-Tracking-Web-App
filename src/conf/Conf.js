@@ -16,6 +16,14 @@ const conf= {
     appwriteWeightProgressCollectionId: import.meta.env.VITE_APPWRITE_WEIGHTPROGRESS_COLLECTION_ID,
 
 
+    // exercise API ninja
+
+
+    exerciseApiNinja: import.meta.env.VITE_Exercise_API,
+
+
+
+
 
 
     appwriteBucketId: import.meta.env.VITE_APPWRITE_BUCKET_ID,

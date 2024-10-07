@@ -15,7 +15,7 @@ function WorkoutForm() {
   
 
   const onSubmit = async (data) => {
-    console.log('Workout submitted:', data)
+   // console.log('Workout submitted:', data)
     
     try {
 

@@ -9,6 +9,11 @@ import authService from '../Appwrite/auth';
 import conf from "../conf/Conf";
 import { Loader } from 'rsuite';
 
+
+import { toast, ToastContainer, Bounce } from 'react-toastify'; // Import react-toastify
+import 'react-toastify/dist/ReactToastify.css'; // Import toastify CSS
+
+
 function DailyGoals({
   title = "Daily Goals",
   defaultTargetCalories = 1000,
@@ -60,6 +65,7 @@ function DailyGoals({
         Object.keys(existingUserData).forEach((key) => {
           if (key === "spendWorkoutTimeMinutes") {
             setValue("spendWorkoutTime", existingUserData[key]); // Rename key
+            //console.log(existingUserData[key])
           }
 
           if (key === "outOfWorkoutTimeMinutes") {
@@ -147,6 +153,8 @@ function DailyGoals({
 
   const onSubmit = async (data) => {
 
+    //console.log(data)
+
 
     if (data.stepsTaken > data.targetSteps) {
             setValue("stepsTaken", data.targetSteps);
@@ -177,14 +185,14 @@ function DailyGoals({
 
     try {
       let updatedDailyGoal;
-      console.log("updating value:", isUpdating)
+      //console.log("updating value:", isUpdating)
       if (isUpdating) {
-        updatedDailyGoal = await service.updateGoals(currentUser.$id, {...data});
+        updatedDailyGoal = await service.updateGoals(currentUser.$id, {...data, SpendWorkoutTime:data.spendWorkoutTime});
       } else {
         const existingData = await service.getUserInformation(conf.appwriteDailyGoalsCollectionId,currentUser.$id)
         if(!existingData){
           updatedDailyGoal = await service.DailyGoals(currentUser.$id, {...data, SpendWorkoutTime: data.spendWorkoutTime});
-          console.log(data)
+         // console.log(data)
         }else{
           console.log("Goal daily data is already found! ")
         }
@@ -194,17 +202,22 @@ function DailyGoals({
       if (updatedDailyGoal) {
         // setDailyGoalData(updatedDailyGoal);
         await createOrUpdateWeeklyGoal(currentUser.$id, {...data});
-        alert(isUpdating ? "Daily Goal Updated!" : "Daily Goal Added!");
+       // alert(isUpdating ? "Daily Goal Updated!" : "Daily Goal Added!");
+
+        toast.success(isUpdating ? "Daily Goal Updated!" : "Daily Goal Added!"); 
 
         await initializeData(); 
 
 
       } else {
-        alert("Failed to update/add Daily Goal");
+        //alert("Failed to update/add Daily Goal");
+
+        toast.error("Failed to update/add Daily Goal");
       }
     } catch (error) {
       console.error("Error updating/adding daily goal:", error);
       alert("An error occurred. Please try again.");
+
     }
   };
 
@@ -262,6 +275,24 @@ function DailyGoals({
 
   return (
     <div className="w-full max-w-6xl mt-10 mx-auto bg-white p-6 rounded-lg shadow-xl overflow-hidden">
+
+       {/* Toast container to display notifications */}
+
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}          
+        hideProgressBar={true}    
+        newestOnTop={false}       
+        closeOnClick={true}      
+        rtl={false}               
+        pauseOnFocusLoss={true}   
+        draggable={true}          
+        pauseOnHover={true}       
+        theme="light" 
+        transition= {Bounce}/>      
+    
+
+
     {loading ? (<div className="flex justify-center items-center h-full">
         <Loader size="sm" />
         </div>):(<>
