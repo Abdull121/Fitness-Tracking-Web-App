@@ -1,5 +1,5 @@
 import conf from '../conf/conf.js';
-import { Client, Account, ID } from "appwrite";
+import { Client, Account, ID,} from "appwrite";
 
 
 export class AuthService {
@@ -77,8 +77,32 @@ export class AuthService {
             console.log("Appwrite service :: logout :: error", error);
         }
     }
+
+
+    // google Auth
+
+
+ async googleAuth() {
+  try {
+    // Initiates OAuth2 session with Google
+    this.account.createOAuth2Session(
+      "google",  // Provider name 'google' for Google OAuth
+      "http://localhost:5173",  // Success redirect URL
+      "http://localhost:5173/login",  // Failure redirect URL
+    );
+  } catch (error) {
+    console.log("Google login error::", error);
+    throw error;  // Optionally re-throw the error if needed
+  }
+}
+
     
 }
+
+
+
+
+
 
 const authService = new AuthService();
 

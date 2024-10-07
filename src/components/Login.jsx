@@ -6,6 +6,7 @@ import Input from './Input'
 import { Link ,useNavigate} from 'react-router-dom'
 import authService from '../Appwrite/auth'
 
+
 import { Dumbbell} from 'lucide-react';
 
 
@@ -53,6 +54,42 @@ export default function SignInForm() {
       }
     }
   };
+
+
+
+  
+  
+
+
+
+  const handleGoogleAuth =  async ()=>{
+
+    try {
+
+      self.addEventListener('fetch', (event) => {
+        // Ignore requests with unsupported schemes like 'chrome-extension://'
+        if (event.request.url.startsWith('chrome-extension://')) {
+          return; // Skip caching for this request
+        }
+        
+        // Proceed with the caching logic for other requests
+        event.respondWith(
+          caches.match(event.request).then((response) => {
+            return response || fetch(event.request);
+          })
+        );
+      });
+      await authService.googleAuth()
+      
+      
+     
+      
+    } catch (error) {
+      console.log(error)
+      
+    }
+
+  }
   
 
 
@@ -152,6 +189,7 @@ export default function SignInForm() {
 
           <div className="mt-6">
             <button
+              onClick={handleGoogleAuth}
               type="button"
               className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
             >
