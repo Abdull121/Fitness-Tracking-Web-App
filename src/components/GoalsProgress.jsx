@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { Target, Footprints, Clock } from 'lucide-react';
 import authService from '../Appwrite/auth'; // Auth service to get the current user
 import service from '../Appwrite/config';   // Appwrite config for accessing the backend
-import conf from '../conf/conf.js';         // Configuration for collection IDs
+import conf from '../conf/Conf';        // Configuration for collection IDs
 
 export default function GoalsProgress({ tittle = "n/a" ,}) {
   const [dailyData, setDailyData] = useState(null);

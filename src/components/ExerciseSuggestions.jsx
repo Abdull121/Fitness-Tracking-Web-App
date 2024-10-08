@@ -1,6 +1,6 @@
 import React from 'react';
 import { Plus, Dumbbell, Activity, RefreshCw, Check, Heart, Weight, RefreshCcw, BicepsFlexed } from 'lucide-react';
-import conf from '../conf/conf';
+import conf from '../conf/Conf';
 import service from '../Appwrite/config';
 import authService from '../Appwrite/auth';
 

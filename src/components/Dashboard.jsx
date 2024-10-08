@@ -4,7 +4,7 @@ import service from '../Appwrite/config';
 import authService from '../Appwrite/auth';
 import conf from '../conf/Conf';
 
-import { Loader } from 'rsuite';
+// import { Loader } from 'rsuite';
 import Pichart from './Pichart';
 
 export default function Dashboard() {
