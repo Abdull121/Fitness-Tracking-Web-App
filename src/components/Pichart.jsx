@@ -65,10 +65,8 @@ function DoughnutChart() {
       {piChartData && piChartData.datasets && piChartData.datasets.length > 0 ? (
         <Doughnut data={piChartData} />
       ) : (
-        <div className="flex justify-center items-center" style={{ height: '300px' }}>
-          <p style={{ fontSize: '20px', color: '#d3d3d3', textAlign: 'center' }}>
-            No data available for this week.
-          </p>
+        <div className="flex items-center justify-center h-40">
+          <p className="text-2xl font-bold text-gray-400 text-center">No weekly data available.</p>
         </div>
       )}
     </div>

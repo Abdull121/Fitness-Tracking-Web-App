@@ -83,9 +83,9 @@ export default function ProgressCharts() {
         {chartData ? (
           <Bar data={chartData} options={{ maintainAspectRatio: false }} />
         ) : (
-          <div className="flex items-center justify-center h-full">
-            <p className="text-lg text-gray-400">No weight data available for this period</p>
-          </div>
+          <div className="flex items-center justify-center h-40">
+          <p className="text-2xl font-bold text-gray-400 text-center">No Weight data available.</p>
+        </div>
         )}
       </div>
     </div>
