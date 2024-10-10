@@ -65,6 +65,16 @@ export default function ExerciseSuggestions() {
           case "middle back":
             getExercisesByMuscle("middle_back");
             break;
+            case "leg":
+              getExercisesByMuscle("adductors");
+              break;
+              case "running":
+              getExercisesByMuscle("quadriceps");
+              break;
+              case "deadlifting":
+                case "weightlifting":
+              getExercisesByMuscle("hamstrings");
+              break;
           default:
             getExercisesByMuscle(recentWorkout.Workout);
             break;

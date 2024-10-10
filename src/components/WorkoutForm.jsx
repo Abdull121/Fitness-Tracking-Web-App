@@ -92,7 +92,7 @@ function WorkoutForm() {
             id="workout"
             {...register("workout", { required: "Workout is required" })}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="e.g., Running, Weightlifting"
+            placeholder="e.g., Biceps, Chest"
           />
           {errors.workout && <p className="mt-1 text-sm text-red-500">{errors.workout.message}</p>}
         </div>
@@ -111,6 +111,7 @@ function WorkoutForm() {
               valueAsNumber: true
             })}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+             placeholder="e.g. 40"
           />
           {errors.duration && <p className="mt-1 text-sm text-red-500">{errors.duration.message}</p>}
         </div>
@@ -129,6 +130,7 @@ function WorkoutForm() {
               valueAsNumber: true
             })}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+             placeholder="e.g. 800"
           />
           {errors.calories && <p className="mt-1 text-sm text-red-500">{errors.calories.message}</p>}
         </div>

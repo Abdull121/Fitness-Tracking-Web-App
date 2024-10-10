@@ -159,6 +159,7 @@ function UserProfileForm() {
           {...register("fitnessGoals", { required: "Fitness goal is required" })}
           onChange={() => setHasChanged(true)} // Track changes
           className="w-full px-3 py-2  border border-gray-300 text-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+           placeholder="e.g. weight Gain"
         />
         {errors.fitnessGoals && <p className="mt-1 text-sm text-red-500">{errors.fitnessGoals.message}</p>}
       </div>
