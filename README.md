@@ -1,6 +1,6 @@
-# Fitness World
+# Fitness World Fitness Tracker
 
-**Fitness World** is a React-based fitness tracking app designed to help users monitor their workouts, track weight progress, and receive personalized exercise recommendations. The app leverages Appwrite for user authentication and data management to track your daily and weekly exercise goals.
+**Fitness World** is a Fullstack React-based fitness tracking app designed to help users monitor their workouts, track weight progress, and receive personalized exercise recommendations. The app leverages Appwrite for user authentication and data management to track your daily and weekly exercise goals.
 
 ## Features
 
