@@ -21,6 +21,7 @@ function Layout() {
           navigate("/login"); 
         }
       } catch (error) {
+        console.log(error)
         navigate("/login");
       } finally {
         setLoading(false);
