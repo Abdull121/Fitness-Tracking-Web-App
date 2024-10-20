@@ -1,5 +1,5 @@
-const jsonData = {
+{
   "routes": [
-      { "src": "/(.*)", "dest": "/" }
+    { "src": "/(.*)", "dest": "/" }
   ]
-};
+}
