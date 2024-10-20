@@ -10,15 +10,6 @@ import Login from './pages/Login.jsx'
 import SignUp from './pages/SignUp.jsx'
 
 
-
-
-
-// import React, { useRef } from 'react';
-// import { DailyGoals } from './components/index.js';
-// import GoalsProgress from './components/GoalsProgress.jsx';
-
-
-
 const router =  createBrowserRouter(
   createRoutesFromElements(
     
@@ -26,7 +17,7 @@ const router =  createBrowserRouter(
      <Route path='login' element={<Login/>}/>
      <Route path='signup' element={<SignUp/>}/>
 
-    <Route path='/' element={<Layout/>}>
+      <Route path='/' element={<Layout/>}>
 
           <Route path='' element={<Dashboard/>} />
            <Route  path='userprofile'element={<UserProfile/>}/>
@@ -34,7 +25,7 @@ const router =  createBrowserRouter(
           <Route path='progress' element={<Progress/>}/>
           <Route path='history' element={<History/>}/>
 
-    </Route>
+     </Route>
     </Route>
   )
 )
