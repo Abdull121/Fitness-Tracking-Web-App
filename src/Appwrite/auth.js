@@ -87,7 +87,8 @@ export class AuthService {
     // Initiates OAuth2 session with Google
     this.account.createOAuth2Session(
       "google",  // Provider name 'google' for Google OAuth
-      "https://fitness-world-gym.vercel.app/",  // Success redirect URL
+       "https://fitness-world-gym.vercel.app/dashboard",  // Success redirect URL
+            
       "http://localhost:5173/login",  // Failure redirect URL
     );
   } catch (error) {

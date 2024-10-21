@@ -8,6 +8,7 @@ import { BiLogOut } from "react-icons/bi";
 function SideBar({ isSidebarOpen }) {
 
 
+ 
 
 
   const handleLogOut = async ()=>{
@@ -35,7 +36,7 @@ function SideBar({ isSidebarOpen }) {
 
   <nav className="flex flex-col space-y-2 pl-4 no-underline">
         <NavLink  
-          to="/"
+          to="/dashboard"
           className={({ isActive }) =>
             `flex items-center px-4 py-2 hover:text-indigo-700 hover:bg-indigo-100 rounded-md transition-colors duration-300 no-underline ${
               isActive ? 'text-indigo-700 bg-indigo-100' : 'text-gray-700'
