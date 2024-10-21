@@ -30,7 +30,7 @@ const router =  createBrowserRouter(
   )
 )
 
-//TODO: useprams for url parameter
+
  
 
 
